@@ -1,8 +1,9 @@
 import React from 'react'
+import './Moviepage.style.css';
 
 const Moviepage = () => {
   return (
-    <div>Moviepage</div>
+    <div className='movie-backgroud'>Moviepage</div>
   )
 }
 

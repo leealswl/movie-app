@@ -1,0 +1,12 @@
+.bg-body-tertiary{
+    background-color: black !important;
+}
+
+.nav-home,
+.nav-movies {
+    color:white !important;
+}
+.nav-home:hover,
+.nav-movies:hover {
+  color: gray !important;
+}
