@@ -23,7 +23,6 @@ function App() {
             <Route index element={<Moviepage />}/>
             <Route path=':id' element={<MovieDetail/>}/>
           </Route>
-        
         </Route>
 
         <Route path='*' element={<NotFoundpage />}/>
