@@ -1,6 +1,7 @@
 import React from 'react'
 import Banner from './components/Banner/Banner';
-import BannerVideo from './components/Banner/BannerVideo';
+import PopularMovieSlide from './components/PopularMovieSlide/PopularMovieSlide';
+// import BannerVideo from './components/Banner/BannerVideo';
 import './Homepage.style.css';
 
 
@@ -11,6 +12,7 @@ const Homepage = () => {
     <div className='main-home'>
       <Banner />
       {/* <BannerVideo /> */}
+      <PopularMovieSlide />
     </div>
   )
 }

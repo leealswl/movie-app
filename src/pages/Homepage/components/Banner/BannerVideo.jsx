@@ -1,35 +1,71 @@
-import React from 'react'
-import { Alert } from 'react-bootstrap'
+import React from 'react';
+import { Alert } from 'react-bootstrap';
+import { useMovieVideos } from '../../../../hooks/useVideoMovies';
 import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
-import "./Banner.style.css"
+import "./Banner.style.css";
 
-function MovieInfo({ movie }) {
+function MovieInfo() {
+  const {
+    data: popularData,
+    isLoading: popularLoading,
+    isError: popularError,
+    error: popularErrorObj,
+  } = usePopularMoviesQuery();
 
-    const {data, isLoading, isError,error }=usePopularMoviesQuery()
-    console.log("dddd",data)
-    if(isLoading){
-        <h1>Loading --- 로딩스피너 넣기</h1>
-    }
-    if(isError){
-        <Alert variant="danger">{error.message}</Alert>
-    }
 
-        // data?.results[1]를 movieItem 변수에 담음
-    const movieItem = data?.results[1];
+  const movieItem = popularData?.results?.[0];
 
-    // video 값이 false면 backdrop_path를, 그렇지 않다면 poster_path를 사용(필요에 따라 수정)
-    // const backgroundUrl = movieItem && !movieItem.video
-    //     ? `url(https://www.themoviedb.org/t/p/w533_and_h300_bestv2${movieItem.backdrop_path})`
-    //     : `url(https://www.themoviedb.org/t/p/w533_and_h300_bestv2${movieItem.poster_path})`;
+  const movieId = movieItem?.id;
 
-  return (
-    <div style={{
-        backgroundImage:"url("+`https://www.themoviedb.org/t/p/w533_and_h300_bestv2${movieItem.video}`+")",
-    }} 
-    className="banner">
-        <p>Video availability: {movieItem.video ? "Available" : "Not available"}</p>
-  </div>
-    );
+  
+  const {
+    data: videoData,
+    isLoading: videoLoading,
+    isError: videoError,
+    error: videoErrorObj,
+  } = useMovieVideos(movieId);
+
+  if (popularLoading) {
+    return <h1>Loading --- 로딩스피너 넣기</h1>;
+  }
+  if (popularError) {
+    return <Alert variant="danger">{popularErrorObj.message}</Alert>;
+  }
+  if (!movieItem) {
+    return <div>No movie data available</div>;
   }
 
-export default MovieInfo
+  if (videoLoading) {
+    return <div>Loading video data...</div>;
+  }
+  if (videoError) {
+    return <Alert variant="danger">Video Error: {videoErrorObj.message}</Alert>;
+  }
+
+  // videoData는 useMovieVideos 훅에서 선택(select) 옵션에 따라 비디오 목록 배열을 반환한다고 가정합니다.
+  // YouTube 트레일러 타입의 비디오 찾기
+  const trailer = videoData?.find(
+    (video) => video.site === "YouTube" && video.type === "Trailer"
+  );
+  const youtubeUrl = trailer ? `https://www.youtube.com/embed/${trailer.key}` : null;
+
+  return (
+    <div className="banner" onClick={() => console.log('비디오 클릭됨!')}>
+      {youtubeUrl ? (
+        <iframe
+          width="560"
+          height="315"
+          src={youtubeUrl}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      ) : (
+        <p>No trailer available</p>
+      )}
+    </div>
+  );
+}
+
+export default MovieInfo;
