@@ -12,10 +12,12 @@ const MovieCard = ({movie}) => {
     const toggleFavorite = () => {
         setIsFavorite((prev) => !prev);
       };
+
+      const posterUrl = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`;
   return (
     <div
     style={{
-      backgroundImage: `url(https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path})`,
+      backgroundImage: `url(${posterUrl})`,
     }}
     className='movie-card'>
         <div className='overlay'>
@@ -28,9 +30,7 @@ const MovieCard = ({movie}) => {
                  {movie.vote_average.toFixed(1)}
             </div>
             <div className='moviecard-adult'>
-                {movie.adult?<TbNumber19Small />
-                :
-                "ALL"}
+                {movie.adult?<TbNumber19Small /> : "ALL"}
             </div>
             <div className="heart-button-container">
         <Button variant="link" onClick={toggleFavorite} className="heart-button">
