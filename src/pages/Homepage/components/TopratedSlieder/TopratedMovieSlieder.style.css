@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-.main-popular-movie {
+.main-toprated-movie {
     font-family: 'RixYeoljeongdo_Regular';
     color: white;
     font-size: 2.5rem;
@@ -14,4 +14,12 @@
 .carousel-container {
     overflow: hidden;
     height: 440px;
+    padding-left: 50px; 
+
+    
 }
+
+.movie-slider {
+    padding: 0 !important;
+    margin-left:0 !important;
+  }

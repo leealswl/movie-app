@@ -14,7 +14,14 @@
     transition: 0.5s;
     
 }
+.moviecard-badge {
+    margin-right: 0.2rem;
+    margin-bottom: 0.5rem; 
+}
 
+.moviecard-adult {
+    margin-top: 0.4rem;
+}
 .overlay {
     width: 100%;
     height: 100%;
@@ -24,10 +31,10 @@
     color: white;
     font-weight: bold;
     overflow-wrap: break-word;
+    padding-left: 1rem;
 }
-.overlay h1 {
-    padding-top: 1rem;
-    font-size: 2rem; 
+.overlay h2 {
+    padding-top: 2rem;
 }
 .overlay:hover {
     opacity: 1;
@@ -36,4 +43,15 @@
 .movie-card:hover {
     transform: scale(1.3) translateZ(20px);
     z-index: 2;
+}
+.heart-button-container{
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+}
+
+.heart-button {
+    border: none;
+    background: transparent;
+    padding: 0;
 }

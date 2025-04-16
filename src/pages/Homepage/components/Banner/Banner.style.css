@@ -12,7 +12,7 @@
     font-family: 'LeferiPoint-SpecialItalicA'
 }
 .release-year {
-    font-size: 0.4em; /* 부모 글자 크기의 70% 크기로 설정 */
+    font-size: 0.4em; 
     margin-left: 0.5rem;
   }
 .rating {
@@ -20,16 +20,18 @@
 }
 
 .banner {
-    height: 56vh;
+    height: 60vh;
     background-position: center;
 }
-
+.main-overview {
+    font-size: 0.7em;
+}
 .banner:before {
     content:'';
     background: linear-gradient(to top, black, transparent);
     position: absolute;
     left: 0;
-    height: 56vh;
+    height: 60vh;
     width: 100%;
 }
 
@@ -39,7 +41,7 @@
     flex-direction: column;
     justify-content: flex-end;
     height: 100%;
-    padding: 2rem;
+    padding: 2rem 2rem 1rem 2rem;
 }
 .banner-text-area h1 {
     font-weight: bold;

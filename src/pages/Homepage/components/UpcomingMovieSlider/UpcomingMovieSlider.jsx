@@ -1,17 +1,18 @@
 import React from 'react'
-import { Alert } from 'react-bootstrap'
-import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
+import useUpcomingMovies from '../../../../hooks/useUpcomingMovies'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Alert } from 'react-bootstrap'
 import MovieCard from '../MovieCard/MovieCard';
-import './PopularMovieSlide.style.css'
-import { BiSolidCameraMovie } from "react-icons/bi";
+import { FaFilm } from 'react-icons/fa';
+import './UpcomingMovieSlider.style.css'
 
-const PopularMovieSlide = () => {
+const UpcomingMovieSlider = () => {
 
-    const{data,isLoading,isError,error}=usePopularMoviesQuery()
+    const {data,isLoading,isError,error}=useUpcomingMovies()
+    console.log("업커밍",data)
 
-    if(isLoading){
+    if(isLoading) {
         return <h1>Loading --- 로딩스피너 넣기</h1>
     }
     if(isError){
@@ -35,12 +36,11 @@ const PopularMovieSlide = () => {
           items: 2
         }
       };
-
   return (
     <div>
-        <h3 className='main-popular-movie'>
-        <BiSolidCameraMovie  style={{ fontSize: '3rem' }}/>{' '}
-             popular movies</h3>
+        <h3 className='main-upcoming-movie'>
+        <FaFilm size={50} />{' '}
+             upcoming movies</h3>
              <Carousel
             infinite={true} 
             centerMode={false}
@@ -59,4 +59,4 @@ const PopularMovieSlide = () => {
   )
 }
 
-export default PopularMovieSlide
+export default UpcomingMovieSlider

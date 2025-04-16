@@ -1,15 +1,17 @@
 import React from 'react'
-import { Alert } from 'react-bootstrap'
-import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
+import useTopratedMovies from '../../../../hooks/useTopratedMovies'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Alert } from 'react-bootstrap'
+import './TopratedMovieSlieder.style.css';
 import MovieCard from '../MovieCard/MovieCard';
-import './PopularMovieSlide.style.css'
-import { BiSolidCameraMovie } from "react-icons/bi";
+import { GiPopcorn } from 'react-icons/gi';
 
-const PopularMovieSlide = () => {
 
-    const{data,isLoading,isError,error}=usePopularMoviesQuery()
+const TopratedMovieSlieder = () => {
+
+    const {data, isLoading, isError, error}=useTopratedMovies()
+    console.log("탑데이터",data)
 
     if(isLoading){
         return <h1>Loading --- 로딩스피너 넣기</h1>
@@ -19,7 +21,9 @@ const PopularMovieSlide = () => {
     }
     // data 또는 data.results가 undefined인 경우 처리
     if (!data || !data.results) {
-        return <div>No movie data available</div>;
+        return <Alert variant="danger">
+            <div>No movie data available</div>
+            </Alert>;
     }
     const responsive = {
         desktop: {
@@ -35,13 +39,12 @@ const PopularMovieSlide = () => {
           items: 2
         }
       };
-
   return (
     <div>
-        <h3 className='main-popular-movie'>
-        <BiSolidCameraMovie  style={{ fontSize: '3rem' }}/>{' '}
-             popular movies</h3>
-             <Carousel
+        <h3 className='main-toprated-movie'>
+        <GiPopcorn style={{ fontSize: '3rem' }} />{' '}
+             top rated movies</h3>
+        <Carousel
             infinite={true} 
             centerMode={false}
             containerClass="carousel-container"
@@ -59,4 +62,4 @@ const PopularMovieSlide = () => {
   )
 }
 
-export default PopularMovieSlide
+export default TopratedMovieSlieder

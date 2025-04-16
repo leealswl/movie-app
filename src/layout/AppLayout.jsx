@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {Outlet} from 'react-router-dom'; //라우터 안에있는 자손들 가져옴
 import './AppLayout.style.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import Footer from '../Footer/Footer';
 
 const AppLayout = () => {
   return (
@@ -48,6 +49,7 @@ const AppLayout = () => {
     </Container>
   </Navbar>
   <Outlet />
+  <Footer/>
   </div>
     
   )

@@ -1,9 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Badge, Button } from 'react-bootstrap';
 import "./MovieCard.style.css"
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { TbNumber19Small } from "react-icons/tb";
+import { FaStar, FaRegStar } from 'react-icons/fa';
 
 //{movie}는 슬라이더에서 가져옴
 const MovieCard = ({movie}) => {
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const toggleFavorite = () => {
+        setIsFavorite((prev) => !prev);
+      };
   return (
     <div
     style={{
@@ -11,30 +19,24 @@ const MovieCard = ({movie}) => {
     }}
     className='movie-card'>
         <div className='overlay'>
-            <h1>{movie.title}</h1>
+            <h2 className='moviecard-title'>{movie.title}</h2>
             {movie.genre_ids.map((id)=>(
-            <Badge bg="danger">{id}</Badge>
+            <Badge className='moviecard-badge' bg="danger">{id}</Badge>
             ))}
         <div>
-                {movie.vote_average}
+                <FaStar color="gold" size={20} />
+                 {movie.vote_average.toFixed(1)}
             </div>
-            <div>
-                {movie.populartiy}
+            <div className='moviecard-adult'>
+                {movie.adult?<TbNumber19Small />
+                :
+                "ALL"}
             </div>
-            <div>
-                {movie.adult?'over18':""}
-            </div>
-        </div>
-        <div>
-            <div>
-                {movie.vote_average}
-            </div>
-            <div>
-                {movie.populartiy}
-            </div>
-            <div>
-                {movie.adult?'over18':""}
-            </div>
+            <div className="heart-button-container">
+        <Button variant="link" onClick={toggleFavorite} className="heart-button">
+          {isFavorite ? <FaHeart color="red" size={24} /> : <FaRegHeart color="red" size={24} />}
+        </Button>
+      </div>
         </div>
     </div>
   )
