@@ -21,16 +21,17 @@ const Banner = () => {
         return <div>No movie data available</div>;
     }
     
-    // vote_average는 0~10 사이의 값 5단계 별로 표현하기 위해 2로 나눕니다.
     const rating = movie.vote_average; 
-    const starCount = Math.round(rating / 2); // 0~5 별
+    const starCount = Math.round(rating / 2);
     const totalStars = 5;
+
+    const posterUrl = `https://www.themoviedb.org/t/p/w533_and_h300_bestv2${data?.results[0].poster_path}`;
     return (
 
     
 
     <div style={{
-        backgroundImage:"url("+`https://www.themoviedb.org/t/p/w533_and_h300_bestv2${data?.results[0].poster_path}`+")",
+        backgroundImage: `url(${posterUrl})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
