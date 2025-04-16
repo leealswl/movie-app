@@ -1,6 +1,5 @@
 import React from 'react'
 import Carousel from 'react-multi-carousel';
-import { BiSolidCameraMovie } from "react-icons/bi";
 import 'react-multi-carousel/lib/styles.css';
 import './MovieSlider.style.css'
 import MovieCard from '../MovieCard/MovieCard';

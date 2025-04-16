@@ -3,7 +3,7 @@ import { Badge, Button } from 'react-bootstrap';
 import "./MovieCard.style.css"
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { TbNumber19Small } from "react-icons/tb";
-import { FaStar, FaRegStar } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 
 //{movie}는 슬라이더에서 가져옴
 const MovieCard = ({movie}) => {
@@ -15,7 +15,7 @@ const MovieCard = ({movie}) => {
   return (
     <div
     style={{
-        backgroundImage:"url("+`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`+")",
+      backgroundImage: `url(https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path})`,
     }}
     className='movie-card'>
         <div className='overlay'>
