@@ -50,5 +50,9 @@
     z-index: 1;
 }
 
-
-
+@media (max-width: 464px) {
+    .main-overview {
+      display: none;
+    }
+  }
+  

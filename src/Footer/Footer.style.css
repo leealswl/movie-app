@@ -1,9 +1,10 @@
 .movie-footer {
-    background-color: #111;       /* 어두운 배경 */
-    color: #ddd;                  /* 밝은 텍스트 색상 */
-    padding: 1.5rem 1rem;
+    background-color: #111;       
+    color: #ddd;                  
+    padding:0 1rem;
     font-family: 'Arial', sans-serif;
     font-size: 0.9rem;
+ 
   }
   
   .footer-content {

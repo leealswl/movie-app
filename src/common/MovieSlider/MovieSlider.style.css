@@ -1,0 +1,57 @@
+@font-face {
+    font-family: 'RixYeoljeongdo_Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2102-01@1.0/RixYeoljeongdo_Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.main-moviename {
+    font-family: 'RixYeoljeongdo_Regular';
+    color: white;
+    font-size: 2.5rem;
+    padding: 3rem 0 0rem 5rem;
+}
+.carousel-container {
+    overflow: hidden;
+    height: 440px;
+    padding-left: 50px;  
+    
+}
+
+.movie-slider {
+    padding: 0 !important;
+    margin-left:0 !important;
+  }
+.main-icon {
+    font-size: 50px; 
+}
+  
+@media (max-width: 768px) {
+    .main-moviename {
+        font-size: 1.8rem; 
+        padding: 2rem 0 0rem 2rem; 
+    }
+    .main-icon {
+        font-size: 35px; 
+    }
+    
+}
+@media (max-width: 464px) {
+    .main-moviename {
+      font-size: 1.5rem;   
+      padding: 1.5rem 0 0 2rem;
+    }
+    .main-icon {
+        font-size: 28px; 
+    }
+    .carousel-container {
+        height: 300px !important;
+        width: 500px !important;   
+        padding-left: 20px !important; 
+        padding-right: 20px !important;
+    }
+    .movie-slider {
+        padding: 0 !important;
+        margin: 0 5px; 
+      }
+  }
