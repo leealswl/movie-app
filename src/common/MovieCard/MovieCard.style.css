@@ -59,9 +59,5 @@
 @media (hover: none), (max-width: 768px) {
     .movie-card:hover {
       transform: none !important;
-      z-index: auto !important;
-    }
-    .overlay:hover {
-      opacity: 0 !important;
     }
   }

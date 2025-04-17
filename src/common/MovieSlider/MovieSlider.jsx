@@ -12,9 +12,12 @@ const MovieSlider = ({title,movies,responsive}) => {
   return (
     <div className='main-movieslider'>
         <h3 className='main-moviename'>
-        <FaFilm className="main-icon" />{'  '}
-        {title}</h3>
+        <FaFilm className="main-icon" />
+        {' '}{title}</h3>
          <Carousel
+            swipeable={true}              // 터치 스와이프 활성화
+            draggable={true} 
+            showDots={false}
             infinite={true} 
             centerMode={false}
             containerClass="carousel-container"
@@ -23,6 +26,7 @@ const MovieSlider = ({title,movies,responsive}) => {
             arrows={true}
             autoPlay={true}
             autoPlaySpeed={2000}
+            removeArrowOnDeviceType={['mobile']}
             >
             {movies.map((movie,index)=>
             (<MovieCard movie={movie} key={index}/>
