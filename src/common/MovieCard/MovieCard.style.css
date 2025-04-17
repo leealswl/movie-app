@@ -56,7 +56,7 @@
     padding: 0;
 }
 
-@media (hover: none), (max-width: 768px) {
+@media (max-width: 464px) and (hover: none) {
     .movie-card:hover {
       transform: none !important;
     }
