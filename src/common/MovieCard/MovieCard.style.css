@@ -60,4 +60,7 @@
     .movie-card:hover {
       transform: none !important;
     }
+    .movie-card {
+        width: 80vw;
+      }
   }
