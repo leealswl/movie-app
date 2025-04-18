@@ -15,6 +15,8 @@
     overflow: hidden;
     height: 440px;
     padding-left: 50px;  
+    padding-left: 0 !important;
+  margin-left: 0 !important;
     
 }
 
@@ -47,8 +49,6 @@
     .carousel-container {
         height: 300px !important;
         width: 500px !important;   
-        padding-left: 20px !important; 
-        padding-right: 20px !important;
     }
     .movie-slider {
         padding: 0 !important;
