@@ -16,7 +16,7 @@ const MovieSlider = ({title,movies,responsive}) => {
         {' '}{title}</h3>
          <Carousel
             swipeable={true}              // 터치 스와이프 활성화
-            draggable={true} 
+            draggable={true}
             showDots={false}
             infinite={true} 
             centerMode={false}
