@@ -1,9 +1,18 @@
+@font-face {
+  font-family: 'LeferiPoint-SpecialItalicA';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialItalicA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .bg-body-tertiary{
     background-color: black !important;
+    font-weight : bold
 }
 
 .nav-home,
 .nav-movies {
+    font-family: 'LeferiPoint-SpecialItalicA';
     color:white !important;
 }
 .nav-home:hover,

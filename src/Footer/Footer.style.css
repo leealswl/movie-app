@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'LeferiPoint-SpecialItalicA';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialItalicA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -18,58 +25,64 @@ align-items: center;
 gap: 0.5rem;
 text-align: center;
 }
+.footer-brand{
+  font-family: 'LeferiPoint-SpecialItalicA';
 
+}
 .footer-brand h2 {
-font-size: 2rem;
-margin: 0;
-color: #fff;
+  font-size: 2rem;
+  margin: 0;
+  color: #fff;
 }
 
 .footer-brand p {
-font-size: 1rem;
-margin: 0.5rem 0 0;
+    font-size: 1rem;
+    margin: 0.5rem 0 0;
 }
 
 .footer-links {
-display: flex;
-gap: 1rem;
-flex-wrap: wrap;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+
 }
 
 .footer-links a {
-color: #ddd;
-text-decoration: none;
-font-size: 0.95rem;
-transition: color 0.3s;
+    color: #ddd;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
 }
 
 .footer-links a:hover {
-color: gray;
+    color: gray;
 }
 
 .footer-social {
-display: flex;
-gap: 1rem;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .footer-social a {
-color: #ddd;
-font-size: 1.25rem;
-transition: color 0.3s;
+    color: #ddd;
+    font-size: 1.25rem;
+    transition: color 0.3s;
 }
 
 .footer-social a:hover {
-color: gray;
+    color: gray;
 }
 
 .footer-bottom {
-border-top: 1px solid #333;
-padding-top: 1rem;
-font-size: 0.85rem;
-text-align: center;
-color: #aaa;
+    border-top: 1px solid #333;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+    color: #aaa;
 }
 .footer-bottom p {
-margin: 0;
+    margin: 0;
 }
   
