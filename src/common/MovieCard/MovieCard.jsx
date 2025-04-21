@@ -4,14 +4,30 @@ import "./MovieCard.style.css"
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { TbNumber19Small } from "react-icons/tb";
 import { FaStar } from 'react-icons/fa';
+import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
 
 //{movie}는 슬라이더에서 가져옴
 const MovieCard = ({movie}) => {
     const [isFavorite, setIsFavorite] = useState(false);
-
+    
     const toggleFavorite = () => {
         setIsFavorite((prev) => !prev);
       };
+
+    const {data:genreData} = useMovieGenreQuery()
+    console.log("gg",genreData)
+
+    const showGenre =(genreIdList)=>{
+        if(!genreData) return [] //장르를 안보여줌
+        const genreNameList=genreIdList.map((id)=>{
+          const genreObj =genreData.find((genre)=>genre.id ===id)
+          return genreObj.name;
+        })
+
+        return genreNameList
+
+    }
+
 
       const posterUrl = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`;
   return (
@@ -22,7 +38,7 @@ const MovieCard = ({movie}) => {
     className='movie-card'>
         <div className='overlay'>
             <h2 className='moviecard-title'>{movie.title}</h2>
-            {movie.genre_ids.map((id)=>(
+            {showGenre(movie.genre_ids).map((id)=>(
             <Badge className='moviecard-badge' bg="danger">{id}</Badge>
             ))}
         <div>

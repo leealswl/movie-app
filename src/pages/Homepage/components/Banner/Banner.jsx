@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert } from 'react-bootstrap'
+import { Alert, Spinner } from 'react-bootstrap'
 import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
 import "./Banner.style.css"
 import { FaStar, FaRegStar } from 'react-icons/fa';
@@ -9,12 +9,19 @@ const Banner = () => {
 
     const {data, isLoading, isError,error }=usePopularMoviesQuery()
     console.log("dddd",data)
-    if(isLoading){
-        <h1>Loading --- 로딩스피너 넣기</h1>
-    }
-    if(isError){
-        <Alert variant="danger">{error.message}</Alert>
-    }
+    if (isLoading) {
+        return (
+          <div className="spinner-container" style={{ textAlign: 'center', padding: '2rem' }}>
+            <Spinner 
+            animation="border" 
+            variant="secondary"
+            style={{ width: '5rem', height: '5rem' }} />
+          </div>
+        );
+      }
+      if(isError){
+          return <Alert variant="danger">{error.message}</Alert>
+      }
 
     const movie = data?.results?.[0];
     if (!movie) {
