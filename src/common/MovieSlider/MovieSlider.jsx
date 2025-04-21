@@ -7,6 +7,7 @@ import { FaFilm } from 'react-icons/fa';
 
 
 
+
 const MovieSlider = ({title,movies,responsive}) => {
     
   return (
@@ -28,7 +29,7 @@ const MovieSlider = ({title,movies,responsive}) => {
             autoPlaySpeed={2000}
             removeArrowOnDeviceType={['mobile']}
             >
-            {movies.map((movie,index)=>
+            {movies?.map((movie,index)=>
             (<MovieCard movie={movie} key={index}/>
             ))}
          </Carousel>

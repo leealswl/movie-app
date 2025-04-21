@@ -9,7 +9,7 @@ import { responsive } from '../../../../constants/responsive';
 const TopratedMovieSlieder = () => {
 
     const {data, isLoading, isError, error}=useTopratedMovies()
-    console.log("탑데이터",data)
+    //console.log("탑데이터",data)
 
     if(isLoading){
         return <h1>Loading </h1>

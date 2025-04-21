@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Spinner } from 'react-bootstrap'
+import { Alert,Spinner } from 'react-bootstrap'
 import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
 import "./Banner.style.css"
 import { FaStar, FaRegStar } from 'react-icons/fa';
@@ -8,7 +8,7 @@ import { FaStar, FaRegStar } from 'react-icons/fa';
 const Banner = () => {
 
     const {data, isLoading, isError,error }=usePopularMoviesQuery()
-    console.log("dddd",data)
+    //console.log("dddd",data)
     if (isLoading) {
         return (
           <div className="spinner-container" style={{ textAlign: 'center', padding: '2rem' }}>

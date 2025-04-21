@@ -15,7 +15,7 @@ const MovieCard = ({movie}) => {
       };
 
     const {data:genreData} = useMovieGenreQuery()
-    console.log("gg",genreData)
+    //console.log("gg",genreData)
 
     const showGenre =(genreIdList)=>{
         if(!genreData) return [] //장르를 안보여줌
@@ -38,7 +38,7 @@ const MovieCard = ({movie}) => {
     className='movie-card'>
         <div className='overlay'>
             <h2 className='moviecard-title'>{movie.title}</h2>
-            {showGenre(movie.genre_ids).map((id)=>(
+            {showGenre(movie?.genre_ids).map((id)=>(
             <Badge className='moviecard-badge' bg="danger">{id}</Badge>
             ))}
         <div>
