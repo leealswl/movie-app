@@ -37,3 +37,7 @@ body{
 .pagination .page-link:focus {
     color: gray !important;
   }
+
+.no-results-container {
+    min-height: 60vh; 
+  }

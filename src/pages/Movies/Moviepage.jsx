@@ -47,7 +47,7 @@ const Moviepage = () => {
 
   if (keyword && data.results.length === 0) {
     return (
-      <Container className="py-5 d-flex justify-content-center">
+      <Container className="py-5 no-results-container d-flex justify-content-center">
         <Alert variant="dark" className="text-center" style={{ backgroundColor: '#000', color: '#fff', border: 'none' ,maxWidth: '600px', width: '100%' }}>
           “{keyword}”에 대한 검색 결과가 없습니다.
         </Alert>
