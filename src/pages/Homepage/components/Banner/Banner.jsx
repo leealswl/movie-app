@@ -3,6 +3,7 @@ import { Alert,Spinner } from 'react-bootstrap'
 import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
 import "./Banner.style.css"
 import { FaStar, FaRegStar } from 'react-icons/fa';
+import Button from 'react-bootstrap/Button';
 
 
 const Banner = () => {
@@ -59,6 +60,7 @@ const Banner = () => {
                 })}
             </div>
             <p className='main-overview'>{movie.overview}</p>
+            <Button variant="light">Preview</Button>
         </div>
     </div>
   )

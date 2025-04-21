@@ -4,57 +4,36 @@ body{
     min-height: 100vh;
 }
 
-/* 전체 컨테이너 */
-.pagination {
+.movie-movie {
     display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-    justify-content: center; /* 가운데 정렬 */
-    font-family: sans-serif;
+    flex-direction: column;
+    min-height: 100vh; 
   }
 
-/* 각 페이지 아이템 */
-.pagination li {
-margin: 0 4px;
-}
+.movie-movie .movie-content {
+    flex: 1;                  
+  }
 
-/* 링크(버튼) 기본 스타일 */
-.pagination li a {
-display: block;
-padding: 0.5rem 0.75rem;
-border: 1px solid #ddd;
-border-radius: 4px;
-color: #007bff;
-text-decoration: none;
-cursor: pointer;
-transition: background-color 0.2s;
-}
+.pagination {
+    display: flex;               
+    justify-content: center;     
+    list-style: none;            
+    padding: 0;
+    margin: 4rem 1rem;
+  }
 
-/* hover 시 배경 강조 */
-.pagination li a:hover {
-background-color: #f1f1f1;
-}
-
-/* 현재 페이지 (active) */
-.pagination li.selected a,
-.pagination li.active a {
-background-color: #007bff;
-color: #fff;
-border-color: #007bff;
-}
-
-/* 이전/다음 버튼 비활성화(disabled) */
-.pagination li.disabled a {
-color: #ccc;
-border-color: #ddd;
-cursor: not-allowed;
-}
-
-/* “…” 같은 break 요소 */
-.pagination li.break a {
-cursor: default;
-border: none;
-background: transparent;
-color: #666;
-}
+.pagination .page-link {
+    background-color: transparent !important;
+    border: none !important;
+    color: #fff !important; 
+  }
+.pagination .disabled .page-link {
+    background-color: transparent !important;
+  }
+.pagination .active .page-link {
+    background-color: transparent !important;
+  }
+.pagination .page-link:hover,
+.pagination .page-link:focus {
+    color: gray !important;
+  }

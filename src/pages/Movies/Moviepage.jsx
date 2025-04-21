@@ -44,31 +44,50 @@ const Moviepage = () => {
   if(isError){
       return <Alert variant="danger">{error.message}</Alert>
   }
-  // data 또는 data.results가 undefined인 경우 처리
-  if (!data || !data.results) {
-      return <div>No movie data available</div>;
+
+  if (keyword && data.results.length === 0) {
+    return (
+      <Container className="py-5 d-flex justify-content-center">
+        <Alert variant="dark" className="text-center" style={{ backgroundColor: '#000', color: '#fff', border: 'none' ,maxWidth: '600px', width: '100%' }}>
+          “{keyword}”에 대한 검색 결과가 없습니다.
+        </Alert>
+      </Container>
+    );
   }
+  
+
   return (
     <div className='movie-movie'>
       <Container>
         <Row>
-          <Col lg={4} xs={12}>
-              <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Dropdown Button
-          </Dropdown.Toggle>
+          <div className="d-flex align-items-center gap-4 mb-4">
+            <Dropdown>
+              <Dropdown.Toggle variant="danger" id="dropdown-sort">
+                Sort
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item href="/movies">Popularity</Dropdown.Item>
+                <Dropdown.Item href="/">Top Rated</Dropdown.Item>
+                <Dropdown.Item href="/">Upcoming</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
 
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-          </Col>
-          <Col lg={8} xs={12}>
-            <Row>
+            <Dropdown>
+              <Dropdown.Toggle variant="danger" id="dropdown-genre">
+                Genre
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Drama</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+  
+            
+          <Col lg={12} xs={12}>
+            <Row className='g-4'>
               {data?.results.map((movie,index)=>(
-          <Col key={index} lg={4} xs={12}>
+          <Col key={index} lg={3} xs={12}>
             <MovieCard movie={movie}/>
           </Col>
           ))}
