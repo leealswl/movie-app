@@ -72,7 +72,7 @@ const MovieDetail = () => {
       <Container className='detail-credit'>
         <div className='credit-cast'>&#8226; CAST</div>
       <div className=''>
-          <Card style={{ width: '12rem', height:'20rem' }}>
+          <Card style={{ width: '13rem', height:'22rem' }}>
             <Card.Img variant="top" src={castUrl} />
             <Card.Body>
               <Card.Title>{credit?.cast[0]?.character}</Card.Title>
