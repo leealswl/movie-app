@@ -37,7 +37,7 @@ const MovieDetail = () => {
     return <Alert variant="danger">{message}</Alert>;
   }
   const posterUrl = `https://image.tmdb.org/t/p/w500${data.poster_path}`
-  const castUrl = `https://media.themoviedb.org/t/p/w276_and_h350_face/${credit.cast[0].profile_path}`
+  //const castUrl = `https://media.themoviedb.org/t/p/w276_and_h350_face/${credit.cast[0].profile_path}`
 
   const rating = data.vote_average; 
   const starCount = Math.round(rating / 2);
