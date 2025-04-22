@@ -1,0 +1,22 @@
+.detail-row {
+    column-gap: 10rem;
+  }
+
+.fw-bold{
+    font-size:3rem;
+}
+
+.detail-tagline{
+    font-size: 1.8rem;
+    font-style: italic;
+    color: rgb(238, 42, 42);
+}
+
+.detail-overview {
+    border-top: 1px solid #ccc;    
+    border-bottom: 1px solid #ccc;  
+    padding: 1rem 0;                 
+    margin: 1.5rem 0;               
+    line-height: 1.6;                
+  }
+
