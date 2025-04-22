@@ -1,9 +1,10 @@
 import React from 'react'
-import { Alert,Spinner,Col,Row, Container,Image, Badge,Card } from 'react-bootstrap'
+import { Alert,Spinner,Col,Row, Container,Image, Badge,Card, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useCredit } from '../../hooks/useCredit'
 import { useDetailMovie } from '../../hooks/useDetailMovie'
 import './MovieDetail.style.css'
+import { FaStar, FaRegStar } from 'react-icons/fa';
 
 
 const MovieDetail = () => {
@@ -13,10 +14,15 @@ const MovieDetail = () => {
   console.log("디테일데이타",data)
 
   const {data: credit,
+    isLoading: isCreditLoading,
+    isError: isCreditError,
+    error: creditError
     } =useCredit(id)
     console.log("크레딧데이터",credit)
 
-  if (isLoading) {
+  
+    
+  if (isLoading || isCreditLoading) {
     return (
       <div className="spinner-container" style={{ textAlign: 'center', padding: '2rem' }}>
         <Spinner 
@@ -26,12 +32,16 @@ const MovieDetail = () => {
       </div>
     );
   }
-  if(isError){
-      return <Alert variant="danger">{error.message}</Alert>
+  if(isError || isCreditError){
+    const message = isError ? error.message : creditError.message;
+    return <Alert variant="danger">{message}</Alert>;
   }
   const posterUrl = `https://image.tmdb.org/t/p/w500${data.poster_path}`
-
   const castUrl = `https://media.themoviedb.org/t/p/w276_and_h350_face/${credit.cast[0].profile_path}`
+
+  const rating = data.vote_average; 
+  const starCount = Math.round(rating / 2);
+  const totalStars = 5;
 
   return (
     <div>
@@ -54,6 +64,7 @@ const MovieDetail = () => {
           </h1>
           <p className='detail-tagline'>{data?.tagline}</p>
           <p className='detail-overview'>{data?.overview}</p>
+          
           <p className='detail-genre'>
           &#8226; Genres : {' '}
             {data?.genres.map((genre) => (
@@ -62,25 +73,39 @@ const MovieDetail = () => {
             </Badge>
             ))}
           </p>
+          <p className="rating"> &#8226;  Rating :
+                {[...Array(totalStars)].map((_, i) => {
+                  return i < starCount ? (
+                    <FaStar key={i} color="gold" size={20} />
+                  ) : (
+                    <FaRegStar key={i} color="gold" size={20} />
+                  );
+                })}
+          </p>
           <p className='detail-release'>  &#8226; Release : {data?.release_date}  </p>
           <p className='detail-run'>&#8226;  Run Time : {data?.runtime} minute </p>
+          
           <p className='detail-crew'>&#8226; Director : {credit?.crew?.slice(0,2).map(crew => crew.name).join(", ")} </p>
-        
+          <Button >미리보기 url 유튜브 연결</Button>
           </Col>
         </Row>
       </Container>
       <Container className='detail-credit'>
         <div className='credit-cast'>&#8226; CAST</div>
       <div className=''>
-          <Card style={{ width: '13rem', height:'22rem' }}>
-            <Card.Img variant="top" src={castUrl} />
-            <Card.Body>
-              <Card.Title>{credit?.cast[0]?.character}</Card.Title>
-              <Card.Text>
-              {credit?.cast[0]?.name}
-              </Card.Text>
-            </Card.Body>
-          </Card>
+      {credit?.cast?.length > 0 && (
+        <Card style={{ width: '13rem', height: '22rem' }}>
+          <Card.Img
+            variant="top"
+            src={`https://media.themoviedb.org/t/p/w276_and_h350_face/${credit.cast[0].profile_path}`}
+            alt={credit.cast[0]?.name}
+          />
+          <Card.Body>
+            <Card.Title>{credit.cast[0].character}</Card.Title>
+            <Card.Text>{credit.cast[0].name}</Card.Text>
+          </Card.Body>
+        </Card>
+          )}
           </div>
       </Container>
     </div>
