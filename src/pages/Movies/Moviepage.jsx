@@ -45,7 +45,7 @@ const Moviepage = () => {
       return <Alert variant="danger">{error.message}</Alert>
   }
 
-  const hasNoResults = keyword && data.results.length === 0;
+  
   if (keyword && data.results.length === 0) {
     return (
       <Container className="py-5 no-results-container d-flex justify-content-center">

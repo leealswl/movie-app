@@ -64,8 +64,14 @@ const MovieDetail = () => {
           </p>
           <p className='detail-release'>  &#8226; Release : {data?.release_date}  &#8226;  Run Time : {data?.runtime} minute </p>
           <p className='detail-crew'>&#8226; Director : {credit?.crew?.slice(0,2).map(crew => crew.name).join(", ")} </p>
-          <div>
-          <Card style={{ width: '10rem', height:'13rem' }}>
+        
+          </Col>
+        </Row>
+      </Container>
+      <Container>
+        <div> 주요 출연진</div>
+      <div className=''>
+          <Card style={{ width: '12rem', height:'20rem' }}>
             <Card.Img variant="top" src={castUrl} />
             <Card.Body>
               <Card.Title>{credit?.cast[0].character}</Card.Title>
@@ -75,13 +81,6 @@ const MovieDetail = () => {
             </Card.Body>
           </Card>
           </div>
-          
-          
-          
-          
-
-          </Col>
-        </Row>
       </Container>
     </div>
     </div>
