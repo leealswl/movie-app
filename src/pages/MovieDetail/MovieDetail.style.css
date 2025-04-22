@@ -1,9 +1,10 @@
 .detail-row {
     column-gap: 10rem;
+    row-gap: 1rem;
   }
 
 .fw-bold{
-    font-size:3rem;
+    font-size:4rem;
 }
 
 .detail-tagline{
@@ -19,4 +20,12 @@
     margin: 1.5rem 0;               
     line-height: 1.6;                
   }
-
+.detail-credit{
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+}
+.credit-cast{
+    font-size: 3rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+}

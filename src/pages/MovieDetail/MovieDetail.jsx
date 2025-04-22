@@ -62,21 +62,22 @@ const MovieDetail = () => {
             </Badge>
             ))}
           </p>
-          <p className='detail-release'>  &#8226; Release : {data?.release_date}  &#8226;  Run Time : {data?.runtime} minute </p>
+          <p className='detail-release'>  &#8226; Release : {data?.release_date}  </p>
+          <p className='detail-run'>&#8226;  Run Time : {data?.runtime} minute </p>
           <p className='detail-crew'>&#8226; Director : {credit?.crew?.slice(0,2).map(crew => crew.name).join(", ")} </p>
         
           </Col>
         </Row>
       </Container>
-      <Container>
-        <div> 주요 출연진</div>
+      <Container className='detail-credit'>
+        <div className='credit-cast'>&#8226; CAST</div>
       <div className=''>
           <Card style={{ width: '12rem', height:'20rem' }}>
             <Card.Img variant="top" src={castUrl} />
             <Card.Body>
-              <Card.Title>{credit?.cast[0].character}</Card.Title>
+              <Card.Title>{credit?.cast[0]?.character}</Card.Title>
               <Card.Text>
-              {credit?.cast[0].name}
+              {credit?.cast[0]?.name}
               </Card.Text>
             </Card.Body>
           </Card>
