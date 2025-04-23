@@ -5,6 +5,11 @@ import { useCredit } from '../../hooks/useCredit'
 import { useDetailMovie } from '../../hooks/useDetailMovie'
 import './MovieDetail.style.css'
 import { FaStar, FaRegStar } from 'react-icons/fa';
+import { useState } from 'react'
+import { useMovieVideos } from '../../hooks/useVideoMovies'
+import TrailerModal from './TrailerModal'
+import { FaPlayCircle } from 'react-icons/fa';
+
 
 
 const MovieDetail = () => {
@@ -20,7 +25,21 @@ const MovieDetail = () => {
     } =useCredit(id)
     console.log("크레딧데이터",credit)
 
-  
+  const {data:trailer, 
+    isLoading: isTrailerLoading} =useMovieVideos(id)
+    //console.log("트레일러데이터",trailer)
+
+  const [showModal, setShowModal] = useState(false);
+  const [trailerKey, setTrailerKey] = useState('');
+
+  const handleShowTrailer = () => {
+    if (!isTrailerLoading && trailer?.length > 0) {
+      setTrailerKey(trailer[0].key);
+      setShowModal(true);
+    } else {
+      alert('예고편 정보가 없습니다.');
+    }
+  };
     
   if (isLoading || isCreditLoading) {
     return (
@@ -37,7 +56,6 @@ const MovieDetail = () => {
     return <Alert variant="danger">{message}</Alert>;
   }
   const posterUrl = `https://image.tmdb.org/t/p/w500${data.poster_path}`
-  //const castUrl = `https://media.themoviedb.org/t/p/w276_and_h350_face/${credit.cast[0].profile_path}`
 
   const rating = data.vote_average; 
   const starCount = Math.round(rating / 2);
@@ -60,7 +78,20 @@ const MovieDetail = () => {
           <Col lg={6} xs={12}>
           <h1>
             <span className="fw-bold">{data?.title}</span>{' '}
-            <span className="release-year">({data?.release_date.slice(0, 4)})</span>
+            <Button variant="link" className="p-0" onClick={handleShowTrailer} 
+            style={{ 
+              cursor: 'pointer', 
+              verticalAlign: 'middle'   
+            }}>
+            <FaPlayCircle size={40} color="#E50914" />
+            </Button>
+
+          <TrailerModal
+            show={showModal}
+            onHide={() => setShowModal(false)}
+            trailerKey={trailerKey}
+            title={data.title}
+          />
           </h1>
           <p className='detail-tagline'>{data?.tagline}</p>
           <p className='detail-overview'>{data?.overview}</p>
@@ -83,10 +114,10 @@ const MovieDetail = () => {
                 })}
           </p>
           <p className='detail-release'>  &#8226; Release : {data?.release_date}  </p>
-          <p className='detail-run'>&#8226;  Run Time : {data?.runtime} minute </p>
-          
+          <p className='detail-run'>&#8226;  Run Time : {data?.runtime} minute   </p>
+          <p className='detail-budget'>&#8226;  Budget : $ {data?.budget}</p>
           <p className='detail-crew'>&#8226; Director : {credit?.crew?.slice(0,2).map(crew => crew.name).join(", ")} </p>
-          <Button >미리보기 url 유튜브 연결</Button>
+          
           </Col>
         </Row>
       </Container>

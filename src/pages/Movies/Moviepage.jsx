@@ -21,15 +21,21 @@ const Moviepage = () => {
   const [query] =useSearchParams()
   const keyword =query.get('q')
   const [page,setPage] = useState(1)
+  
 
   const {data,isLoading,isError,error}=useSearchMovieQuery({keyword,page})
   console.log("무비데이터",data)
 
+  // 최대 페이지수 1000개
+
+  const rawTotalPages = data?.total_pages ?? 0
+  const pageCount = Math.min(rawTotalPages, 100)
 
   const handlePageClick=({selected})=>{
     setPage(selected+1)
   }
-    
+
+  
 
   if (isLoading) {
     return (
@@ -93,12 +99,13 @@ const Moviepage = () => {
           </Col>
           ))}
             </Row>
+            {pageCount > 0 && (
             <ReactPaginate
               nextLabel="next >"
               onPageChange={handlePageClick}
-              pageRangeDisplayed={3}
-              marginPagesDisplayed={2}
-              pageCount={data?.total_pages} //전체페이지가 몇개인지 콘솔에서 확인
+              pageRangeDisplayed={10}
+              marginPagesDisplayed={1}
+              pageCount={pageCount} //전체페이지가 몇개인지 콘솔에서 확인
               previousLabel="< previous"
               pageClassName="page-item"
               pageLinkClassName="page-link"
@@ -106,7 +113,7 @@ const Moviepage = () => {
               previousLinkClassName="page-link"
               nextClassName="page-item"
               nextLinkClassName="page-link"
-              breakLabel="..."
+              // breakLabel="..."
               breakClassName="page-item"
               breakLinkClassName="page-link"
               containerClassName="pagination"
@@ -114,6 +121,7 @@ const Moviepage = () => {
               renderOnZeroPageCount={null}
               forcePage={page-1}
               />
+              )}
           </Col>
         </Row>
       </Container>
