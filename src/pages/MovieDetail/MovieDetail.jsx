@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert,Spinner,Col,Row, Container,Image, Badge,Card, Button } from 'react-bootstrap'
+import { Alert,Spinner,Col,Row, Container,Image, Badge, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useCredit } from '../../hooks/useCredit'
 import { useDetailMovie } from '../../hooks/useDetailMovie'
@@ -11,6 +11,7 @@ import TrailerModal from './TrailerModal'
 import { FaPlayCircle } from 'react-icons/fa';
 import Review from './Review'
 import { useReview } from '../../hooks/useReview'
+import MovieCast from './MovieCast'
 
 
 
@@ -18,7 +19,7 @@ const MovieDetail = () => {
 
   const {id}=useParams()
   const {data, isError, isLoading, error}=useDetailMovie(id)
-  console.log("디테일데이타",data)
+  //console.log("디테일데이타",data)
 
   const {data: credit,
     isLoading: isCreditLoading,
@@ -33,7 +34,7 @@ const MovieDetail = () => {
 
   const {data:reviewData,
   isLoading:isReviewLoading}=useReview(id)
-  console.log("리뷰",reviewData)
+  //console.log("리뷰",reviewData)
 
   const [showModal, setShowModal] = useState(false);
   const [trailerKey, setTrailerKey] = useState('');
@@ -126,31 +127,13 @@ const MovieDetail = () => {
           <p className='detail-run'>&#8226;  Run Time : {data?.runtime} minute   </p>
           <p className='detail-budget'>&#8226;  Budget : $ {data?.budget}</p>
           <p className='detail-crew'>&#8226; Director : {credit?.crew?.slice(0,2).map(crew => crew.name).join(", ")} </p>
-          
           </Col>
         </Row>
       </Container>
-      <Container className='detail-credit'>
-        <div className='credit-cast'>&#8226; CAST</div>
-          <div className=''>
-      {credit?.cast?.length > 0 && (
-        <Card style={{ width: '13rem', height: '22rem' }}>
-          <Card.Img
-            variant="top"
-            src={`https://media.themoviedb.org/t/p/w276_and_h350_face/${credit.cast[0].profile_path}`}
-            alt={credit.cast[0]?.name}
-          />
-          <Card.Body>
-            <Card.Title>{credit.cast[0].character}</Card.Title>
-            <Card.Text>{credit.cast[0].name}</Card.Text>
-          </Card.Body>
-        </Card>
-          )}
-          </div>
-          <div>
-          <div className='detail-review'>&#8226; Reviews</div> 
+      <Container className='detail-section'>
+          <MovieCast credit={credit}/>
+          <div>&#8226; Recommand movie 영역</div>
           <Review reviews={reviewData}/>
-          </div>
       </Container>
     </div>
     </div>

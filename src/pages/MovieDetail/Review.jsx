@@ -22,6 +22,8 @@ const Review = ({reviews}) => {
       };  
       
       return (
+        <>
+        <div className='detail-review'>&#8226; Reviews</div> 
         <div className="review-list">
           {reviews.results.map((rev) => {
             const isExpanded = expandedIds.has(rev.id);
@@ -48,6 +50,7 @@ const Review = ({reviews}) => {
         );
     })}
     </div>
+    </>
 );
 };
 
