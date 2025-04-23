@@ -22,11 +22,15 @@ const SimilarMovie = ({ similar }) => {
         {similar.results.slice(0, 5).map((m) => (
           <Col key={m.id}>
             <Card className="similar-card">
-              <Card.Img
+                {m.poster_path ? (
+                <Card.Img
                 variant="top"
                 src={`https://image.tmdb.org/t/p/w200${m.poster_path}`}
                 alt={m.title}
-              />
+              /> ) : (
+                <div className="recommand-placeholder-img" />
+              )}
+              
               <Card.Body>
                 <Card.Title className="similar-title">{m.title}</Card.Title>
               </Card.Body>
