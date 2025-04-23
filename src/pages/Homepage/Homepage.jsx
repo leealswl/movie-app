@@ -14,7 +14,6 @@ const Homepage = () => {
   return (
     <div className='main-home'>
       <Banner />
-      {/* <BannerVideo /> */}
       <PopularMovieSlide />
       <TopratedMovieSlieder />
       <UpcomingMovieSlider />

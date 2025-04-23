@@ -1,8 +1,6 @@
 import React from 'react'
 import { Modal} from 'react-bootstrap'
 
-
-
 const TrailerModal = ({show, onHide, trailerKey,title }) => {
 
 

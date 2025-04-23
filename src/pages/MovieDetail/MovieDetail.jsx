@@ -99,7 +99,10 @@ const MovieDetail = () => {
           <p className='detail-genre'>
           &#8226; Genres : {' '}
             {data?.genres.map((genre) => (
-            <Badge key={genre?.id} bg="badge text-bg-secondary" className="moviecard-badge me-1">
+            <Badge key={genre?.id} bg="badge text-bg-secondary" className="moviecard-badge me-1"
+            style={{ 
+              fontSize: '1rem',
+            }}>
               {genre?.name}
             </Badge>
             ))}

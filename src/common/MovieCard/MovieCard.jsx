@@ -41,7 +41,10 @@ const MovieCard = ({movie}) => {
     }}
     className='movie-card'>
         <div className='overlay'>
-            <h2 className='moviecard-title'>{movie.title}</h2>
+            <h2 className='moviecard-title'>
+              {movie.title.length > 25
+              ? `${movie.title.slice(0, 25)}...`
+              : movie.title}</h2>
             {showGenre(movie?.genre_ids).map((id)=>(
             <Badge className='moviecard-badge' bg="danger">{id}</Badge>
             ))}
@@ -53,7 +56,11 @@ const MovieCard = ({movie}) => {
                 {movie.adult?<TbNumber19Small /> : "ALL"}
             </div>
             <div className="heart-button-container">
-        <Button variant="link" onClick={toggleFavorite} className="heart-button">
+        <Button variant="link"  className="heart-button"   
+        onClick={e => {
+        e.stopPropagation();   // 디테일페이지안넘어가게 수정
+        toggleFavorite();
+      }}>
           {isFavorite ? <FaHeart color="red" size={24} /> : <FaRegHeart color="red" size={24} />}
         </Button>
       </div>
