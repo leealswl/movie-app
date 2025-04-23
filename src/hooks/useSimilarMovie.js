@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import api from "../utils/api"
 
 const fetchSimilarMovie=({movieId})=>{
-    return api.get(`/movie/${movieId}/similar`)
+    return api.get(`/movie/${movieId}/recommendations`)
 }
 
 export const useSimilarMovie =(movieId)=>{

@@ -16,8 +16,8 @@ const SimilarMovie = ({ similar }) => {
  
 
   return (
-    <div className="similar-section">
-      <h4 className="credit-cast">&#8226; Recommand 카드 or 슬라이더</h4>
+    <div className="similar-section mb-5">
+      <h4 className="credit-cast">&#8226; Recommand영역 슬라이더로 교체</h4>
       <Row xs={2} sm={3} md={4} lg={5} className="g-3">
         {similar.results.slice(0, 5).map((m) => (
           <Col key={m.id}>
