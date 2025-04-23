@@ -5,8 +5,13 @@ import { Card , Button } from 'react-bootstrap';
 
 const Review = ({reviews}) => {
     const [expandedIds, setExpandedIds] = useState(new Set());
-    if (!reviews || !reviews.results?.length) {
-        return <p className="text-center">등록된 리뷰가 없습니다.</p>;
+    if (!reviews.results?.length) {
+        return (
+        <>
+        <div className="detail-review">&#8226; Reviews</div>
+        <p className="text-center">There are No registered reviews</p>
+        </>)
+        
       }
 
     const reviewExpand = (id) => {

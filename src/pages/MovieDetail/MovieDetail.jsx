@@ -44,7 +44,7 @@ const MovieDetail = () => {
       setTrailerKey(trailer[0].key);
       setShowModal(true);
     } else {
-      alert('예고편 정보가 없습니다.');
+      alert('There is No trailer information');
     }
   };
     
