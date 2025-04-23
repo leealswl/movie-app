@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Alert,Spinner,Col,Row, Container,Image, Badge, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useCredit } from '../../hooks/useCredit'
@@ -12,7 +13,8 @@ import { FaPlayCircle } from 'react-icons/fa';
 import Review from './Review'
 import { useReview } from '../../hooks/useReview'
 import MovieCast from './MovieCast'
-
+import { useSimilarMovie } from '../../hooks/useSimilarMovie'
+import SimilarMovie from './SimilarMovie'
 
 
 const MovieDetail = () => {
@@ -26,7 +28,7 @@ const MovieDetail = () => {
     isError: isCreditError,
     error: creditError
     } =useCredit(id)
-    console.log("크레딧데이터",credit)
+    //console.log("크레딧데이터",credit)
 
   const {data:trailer, 
     isLoading: isTrailerLoading} =useMovieVideos(id)
@@ -35,6 +37,11 @@ const MovieDetail = () => {
   const {data:reviewData,
   isLoading:isReviewLoading}=useReview(id)
   //console.log("리뷰",reviewData)
+
+  const {
+    data:similarData,
+    isLoading:isSimilarLoading}=useSimilarMovie(id)
+  
 
   const [showModal, setShowModal] = useState(false);
   const [trailerKey, setTrailerKey] = useState('');
@@ -48,7 +55,7 @@ const MovieDetail = () => {
     }
   };
     
-  if (isLoading || isCreditLoading ||isReviewLoading) {
+  if (isLoading || isCreditLoading ||isReviewLoading ||isSimilarLoading) {
     return (
       <div className="spinner-container" style={{ textAlign: 'center', padding: '2rem' }}>
         <Spinner 
@@ -132,9 +139,9 @@ const MovieDetail = () => {
       </Container>
       <Container className='detail-section'>
           <MovieCast credit={credit}/>
-          <div>&#8226; Recommand movie 영역</div>
           <Review reviews={reviewData}/>
-      </Container>
+          <SimilarMovie similar={similarData} />
+       </Container>
     </div>
     </div>
     
