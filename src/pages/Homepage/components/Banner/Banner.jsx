@@ -16,7 +16,7 @@ const Banner = () => {
     const movieId = data?.results?.[0]?.id;
     const {data:trailer, 
           isLoading: isTrailerLoading} =useMovieVideos(movieId)
-          console.log("트레일러데이터",trailer)
+          //console.log("트레일러데이터",trailer)
 
     const [showModal, setShowModal] = useState(false);
     const [trailerKey, setTrailerKey] = useState('');
@@ -37,7 +37,7 @@ const Banner = () => {
         return <div>No movie data available</div>;
     }
     const posterUrl = `https://www.themoviedb.org/t/p/w533_and_h300_bestv2${data?.results[0].poster_path}`;
-    
+
     const handleShowTrailer = () => {
       if (!isTrailerLoading && trailer?.length > 0) {
         setTrailerKey(trailer[0].key);

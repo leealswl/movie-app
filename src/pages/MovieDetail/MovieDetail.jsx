@@ -9,6 +9,8 @@ import { useState } from 'react'
 import { useMovieVideos } from '../../hooks/useVideoMovies'
 import TrailerModal from './TrailerModal'
 import { FaPlayCircle } from 'react-icons/fa';
+import Review from './Review'
+import { useReview } from '../../hooks/useReview'
 
 
 
@@ -29,6 +31,10 @@ const MovieDetail = () => {
     isLoading: isTrailerLoading} =useMovieVideos(id)
     //console.log("트레일러데이터",trailer)
 
+  const {data:reviewData,
+  isLoading:isReviewLoading}=useReview(id)
+  console.log("리뷰",reviewData)
+
   const [showModal, setShowModal] = useState(false);
   const [trailerKey, setTrailerKey] = useState('');
 
@@ -41,7 +47,7 @@ const MovieDetail = () => {
     }
   };
     
-  if (isLoading || isCreditLoading) {
+  if (isLoading || isCreditLoading ||isReviewLoading) {
     return (
       <div className="spinner-container" style={{ textAlign: 'center', padding: '2rem' }}>
         <Spinner 
@@ -90,7 +96,7 @@ const MovieDetail = () => {
             show={showModal}
             onHide={() => setShowModal(false)}
             trailerKey={trailerKey}
-            title={data.title}
+            title={data?.title}
           />
           </h1>
           <p className='detail-tagline'>{data?.tagline}</p>
@@ -126,7 +132,7 @@ const MovieDetail = () => {
       </Container>
       <Container className='detail-credit'>
         <div className='credit-cast'>&#8226; CAST</div>
-      <div className=''>
+          <div className=''>
       {credit?.cast?.length > 0 && (
         <Card style={{ width: '13rem', height: '22rem' }}>
           <Card.Img
@@ -140,6 +146,10 @@ const MovieDetail = () => {
           </Card.Body>
         </Card>
           )}
+          </div>
+          <div>
+          <div className='detail-review'>&#8226; Reviews</div> 
+          <Review reviews={reviewData}/>
           </div>
       </Container>
     </div>
