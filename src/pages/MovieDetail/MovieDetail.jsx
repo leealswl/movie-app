@@ -16,12 +16,13 @@ import MovieCast from './MovieCast'
 import { useSimilarMovie } from '../../hooks/useSimilarMovie'
 import SimilarMovie from './SimilarMovie'
 
+const NO_IMAGE = process.env.PUBLIC_URL + '/noimg.png';
 
 const MovieDetail = () => {
 
   const {id}=useParams()
   const {data, isError, isLoading, error}=useDetailMovie(id)
-  //console.log("디테일데이타",data)
+  console.log("디테일데이타",data)
 
   const {data: credit,
     isLoading: isCreditLoading,
@@ -69,7 +70,9 @@ const MovieDetail = () => {
     const message = isError ? error.message : creditError.message;
     return <Alert variant="danger">{message}</Alert>;
   }
-  const posterUrl = `https://image.tmdb.org/t/p/w500${data.poster_path}`
+  const posterUrl = data.poster_path
+  ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+  : NO_IMAGE
 
   const rating = data.vote_average; 
   const starCount = Math.round(rating / 2);

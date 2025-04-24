@@ -8,13 +8,16 @@ import { FaFilm } from 'react-icons/fa';
 
 
 
-const MovieSlider = ({title,movies,responsive}) => {
+const MovieSlider = ({title,movies,responsive,showTitle=true}) => {
     
   return (
-    <div className='main-movieslider'>
-        <h3 className='main-moviename'>
-        <FaFilm className="main-icon" />
-        {' '}{title}</h3>
+    <div className="main-movieslider">
+      {showTitle && (
+        <h3 className="main-moviename">
+          <FaFilm className="main-icon" />{' '}
+          {title}
+        </h3>
+      )}
          <Carousel
             swipeable={true}              // 터치 스와이프 활성화
             draggable={true}

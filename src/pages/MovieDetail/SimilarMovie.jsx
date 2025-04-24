@@ -1,45 +1,31 @@
 import React from 'react'
-import { Card,Row,Col } from 'react-bootstrap';
+import MovieSlider from '../../common/MovieSlider/MovieSlider';
+import { responsive } from '../../constants/responsive';
 
 
-const SimilarMovie = ({ similar }) => {
-    
+
+const SimilarMovie = ({ similar }) => { 
   if (!similar?.results?.length) {
     return (
         <>
-        <div>&#8226; Recommand</div>
+        <div className='detail-similar'>&#8226; Recommand</div>
         <p className="text-center">There are No Recommand movies.</p>
         </>
     )
      } 
   
- 
-
   return (
-    <div className="similar-section mb-5">
-      <h4 className="credit-cast">&#8226; Recommand영역 슬라이더로 교체</h4>
-      <Row xs={2} sm={3} md={4} lg={5} className="g-3">
-        {similar.results.slice(0, 5).map((m) => (
-          <Col key={m.id}>
-            <Card className="similar-card">
-                {m.poster_path ? (
-                <Card.Img
-                variant="top"
-                src={`https://image.tmdb.org/t/p/w200${m.poster_path}`}
-                alt={m.title}
-              /> ) : (
-                <div className="recommand-placeholder-img" />
-              )}
-              
-              <Card.Body>
-                <Card.Title className="similar-title">{m.title}</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+    <div className="similar-section mb-5" style={{ overflow: 'hidden' }}>
+      &#8226; Similar Movie
+        <MovieSlider 
+          movies={similar.results.slice(0, 10)} 
+          responsive={responsive} 
+          showTitle={false} 
+          partialVisible={false} 
+          containerClass="carousel-container no-pad"
+          itemClass="movie-slider no-gutter"
+        />
     </div>
-    
   );
 };
 

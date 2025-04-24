@@ -3,7 +3,15 @@ import { Row, Col, Card } from 'react-bootstrap';
 
 
 const MovieCast = ({credit}) => {
-    if (!credit?.cast?.length) return null;
+    if (!credit?.cast?.length) {
+      return (
+        <>
+        <div className='detail-cast'>&#8226; Cast</div>
+        <p className="text-center">No Cast information available.</p>
+        </>
+    )
+     } 
+    
 
     const castList = credit.cast.slice(0, 6);
 

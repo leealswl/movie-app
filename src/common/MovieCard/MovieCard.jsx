@@ -7,6 +7,11 @@ import { FaStar } from 'react-icons/fa';
 import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
 import { useNavigate } from 'react-router-dom';
 
+
+
+
+const NO_IMAGE = process.env.PUBLIC_URL + '/noimg.png';
+
 //{movie}는 슬라이더에서 가져옴
 const MovieCard = ({movie}) => {
     const [isFavorite, setIsFavorite] = useState(false);
@@ -33,8 +38,10 @@ const MovieCard = ({movie}) => {
       navigate(`/movies/${movie.id}`)
     }
 
-
-    const posterUrl = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`;
+    const posterUrl = movie.poster_path
+    ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`
+    : NO_IMAGE;
+    // const posterUrl = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`;
   return (
     <div onClick={showDetail}
     style={{
