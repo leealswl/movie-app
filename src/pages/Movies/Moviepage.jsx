@@ -17,6 +17,10 @@ import { useState } from 'react';
 //page state 만들기
 //페이지네이션 클릭할대마다 page 바꾸기
 /// page값이 바뀔대마다 useSearchmovie 에 page까지 넣어서 fetch
+
+// 최대 페이지 수 500 최상단에 넣어놔야 렌더링될때마다 재선언되지 않음
+const TMDB_MAX_PAGE = 500
+
 const Moviepage = () => {
   const [query] =useSearchParams()
   const keyword =query.get('q')
@@ -26,11 +30,10 @@ const Moviepage = () => {
   const {data,isLoading,isError,error}=useSearchMovieQuery({keyword,page})
   console.log("무비데이터",data)
 
-  // 최대 페이지수 1000개
-
+  
   const rawTotalPages = data?.total_pages ?? 0
-  const pageCount = Math.min(rawTotalPages, 100)
-
+  const pageCount = Math.min(rawTotalPages, TMDB_MAX_PAGE)
+ 
   const handlePageClick=({selected})=>{
     setPage(selected+1)
   }
