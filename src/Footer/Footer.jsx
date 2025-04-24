@@ -3,6 +3,7 @@ import './Footer.style.css';
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
+  const noop = (e) => e.preventDefault()
   return (
     <footer className="movie-footer">
       <div className="footer-content">
@@ -13,19 +14,19 @@ const Footer = () => {
           <a href="/">Home</a>
           <a href="/movies">Movies</a>
           <a href="/movies/671">Detail</a>
-          <a href="/">Contact</a>
+          <a href="/" onClick={noop} >Contact</a>
         </div>
         <div className="footer-social">
-          <a href="/" target="_blank" rel="noreferrer">
+          <a href="/" onClick={noop} target="_blank" rel="noreferrer">
             <FaFacebookF />
           </a>
-          <a href="/" target="_blank" rel="noreferrer">
+          <a href="/" onClick={noop}  target="_blank" rel="noreferrer">
             <FaTwitter />
           </a>
-          <a href="/" target="_blank" rel="noreferrer">
+          <a href="/" onClick={noop} target="_blank" rel="noreferrer">
             <FaInstagram />
           </a>
-          <a href="/" target="_blank" rel="noreferrer">
+          <a href="/"onClick={noop}  target="_blank" rel="noreferrer">
             <FaYoutube />
           </a>
         </div>

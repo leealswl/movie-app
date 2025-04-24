@@ -3,7 +3,6 @@ import MovieSlider from '../../common/MovieSlider/MovieSlider';
 import { responsive } from '../../constants/responsive';
 
 
-
 const SimilarMovie = ({ similar }) => { 
   if (!similar?.results?.length) {
     return (
