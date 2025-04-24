@@ -132,7 +132,7 @@ const MovieDetail = () => {
           </p>
           <p className='detail-release'>  &#8226; Release : {data?.release_date}  </p>
           <p className='detail-run'>&#8226;  Run Time : {data?.runtime} minute   </p>
-          <p className='detail-budget'>&#8226;  Budget : $ {data?.budget}</p>
+          <p className='detail-budget'>&#8226;  Budget : $ {data?.budget.toLocaleString()}</p>
           <p className='detail-crew'>&#8226; Director : {credit?.crew?.slice(0,2).map(crew => crew.name).join(", ")} </p>
           </Col>
         </Row>

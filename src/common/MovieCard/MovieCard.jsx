@@ -28,12 +28,13 @@ const MovieCard = ({movie}) => {
         return genreNameList
     }
 
-   const navigate = useNavigate()
+    const navigate = useNavigate()
     const showDetail =()=>{
       navigate(`/movies/${movie.id}`)
     }
 
-      const posterUrl = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`;
+
+    const posterUrl = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`;
   return (
     <div onClick={showDetail}
     style={{

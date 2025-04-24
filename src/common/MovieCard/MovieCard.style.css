@@ -13,6 +13,7 @@
     cursor: pointer;
     transition: 0.5s;
     position: relative;
+    background-position: center;
     
 }
 .moviecard-badge {
