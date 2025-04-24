@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useState,useMemo }from 'react'
 import { Alert,Col,Container,Row,Spinner  } from 'react-bootstrap'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useSearchParams } from 'react-router-dom';
 import MovieCard from '../../common/MovieCard/MovieCard';
 import { useSearchMovieQuery } from '../../hooks/useSearchMovie';
-import './Moviepage.style.css';
 import ReactPaginate from 'react-paginate';
-import { useState } from 'react';
+import './Moviepage.style.css';
 
 
 //무비페이지 경로 2가지
@@ -18,27 +17,32 @@ import { useState } from 'react';
 //페이지네이션 클릭할대마다 page 바꾸기
 /// page값이 바뀔대마다 useSearchmovie 에 page까지 넣어서 fetch
 
-// 최대 페이지 수 500 최상단에 넣어놔야 렌더링될때마다 재선언되지 않음
+// 최대 페이지 수 100 최상단에 넣어놔야 렌더링될때마다 재선언되지 않음
 const maxpage = 500
 
 const Moviepage = () => {
   const [query] =useSearchParams()
   const keyword =query.get('q')
   const [page,setPage] = useState(1)
-  
+  const [sortOption, setSortOption] = useState('popularity.desc')
 
-  const {data,isLoading,isError,error}=useSearchMovieQuery({keyword,page})
+  const {data,isLoading,isError,error}=useSearchMovieQuery({keyword,page,sortOption})
   console.log("무비데이터",data)
 
-  
-  const rawTotalPages = data?.total_pages ?? 0
-  const pageCount = Math.min(rawTotalPages, maxpage)
- 
-  const handlePageClick=({selected})=>{
-    setPage(selected+1)
-  }
+  const resultsArray = useMemo(
+    () => (Array.isArray(data?.results) ? data.results : []),
+    [data?.results]
+  )
+  const sortedResults = useMemo(() => {
+    return resultsArray
+      .slice()
+      .sort((a, b) =>
+        sortOption === 'popularity.desc'
+          ? b.popularity - a.popularity
+          : a.popularity - b.popularity
+      )
+  }, [resultsArray, sortOption])
 
-  
 
   if (isLoading) {
     return (
@@ -54,8 +58,7 @@ const Moviepage = () => {
       return <Alert variant="danger">{error.message}</Alert>
   }
 
-  
-  if (keyword && data.results.length === 0) {
+  if (keyword && resultsArray.length === 0) {
     return (
       <Container className="py-5 no-results-container d-flex justify-content-center">
         <Alert variant="dark" className="text-center" style={{ backgroundColor: '#000', color: '#fff', border: 'none' ,maxWidth: '600px', width: '100%' }}>
@@ -64,7 +67,11 @@ const Moviepage = () => {
       </Container>
     );
   }
-  
+
+  const rawTotalPages = typeof data?.total_pages === 'number' ? data.total_pages : 0
+  const pageCount = Math.min(rawTotalPages,maxpage)
+  const handlePageClick = ({ selected }) => setPage(selected + 1)
+
 
   return (
     <div className='movie-movie'>
@@ -73,12 +80,18 @@ const Moviepage = () => {
           <div className="d-flex align-items-center gap-4 mb-4">
             <Dropdown>
               <Dropdown.Toggle variant="danger" id="dropdown-sort">
-                Sort
+              {sortOption === 'popularity.desc' ? 'Popularity' : 'Non Popularity'}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item href="/movies">Popularity</Dropdown.Item>
-                <Dropdown.Item href="/">Top Rated</Dropdown.Item>
-                <Dropdown.Item href="/">Upcoming</Dropdown.Item>
+                <Dropdown.Item onClick={() => {
+                    setSortOption('popularity.desc')
+                    setPage(1)
+                  }} >Popularity</Dropdown.Item>
+                <Dropdown.Item onClick={() => {
+                    setSortOption('popularity.asc')
+                    setPage(1)
+                  }}>non popularity</Dropdown.Item>
+
               </Dropdown.Menu>
             </Dropdown>
 
@@ -93,10 +106,10 @@ const Moviepage = () => {
             </Dropdown>
           </div>
   
-            
+
           <Col lg={12} xs={12}>
             <Row className='g-4'>
-              {data?.results.map((movie,index)=>(
+              {sortedResults.map((movie,index)=>(
           <Col key={index} lg={3} xs={12}>
             <MovieCard movie={movie}/>
           </Col>
