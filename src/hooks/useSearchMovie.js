@@ -3,14 +3,25 @@ import api from "../utils/api"
 
 
 const fetchSearchMovie=({keyword,page,sortOption,genreFilter })=>{
-  return api.get('/discover/movie', {
+  const commonParams = {
+    page,
+    include_adult: false,
+  };
+
+  if (keyword) {
+    return api.get("/search/movie", {
+      params: {
+        ...commonParams,
+        query: keyword,
+      },
+    });
+  }
+
+  return api.get("/discover/movie", {
     params: {
-      page,
-      include_adult: false,
-      // 키워드 있으면 with_keywords, 없으면 with_genres
-      ...(keyword ? { with_keywords: keyword } : {}),
+      ...commonParams,
       ...(genreFilter ? { with_genres: genreFilter } : {}),
-      sort_by: sortOption,     // 'popularity.desc' 또는 'popularity.asc'
+      sort_by: sortOption,
     },
   });
 };
@@ -18,8 +29,8 @@ const fetchSearchMovie=({keyword,page,sortOption,genreFilter })=>{
 export const useSearchMovieQuery=({
   keyword='',
   page=1,
+  sortOption = "popularity.desc",
   genreFilter = '',
-  sortOption = "popularity.desc"
 })=>{
     return useQuery({
         queryKey:['movie-search',{keyword,page,sortOption,genreFilter }],
