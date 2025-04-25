@@ -3,23 +3,24 @@ import api from "../utils/api"
 
 
 const fetchSearchMovie=({keyword,page,sortOption,genreFilter })=>{
-    if (keyword) {
-        //  클라이언트 useMemo로 정렬
-        return api.get("/search/movie", {
-          params: { query: keyword, page },
-        })
-      } else {
-        return api.get("/discover/movie", {
-          params: {
-            page,
-            sort_by: sortOption,   // 'popularity.desc' or 'popularity.asc'
-            ...(genreFilter ? { with_genres: genreFilter } : {}),
-          },
-        })
-      }
-    }
+  return api.get('/discover/movie', {
+    params: {
+      page,
+      include_adult: false,
+      // 키워드 있으면 with_keywords, 없으면 with_genres
+      ...(keyword ? { with_keywords: keyword } : {}),
+      ...(genreFilter ? { with_genres: genreFilter } : {}),
+      sort_by: sortOption,     // 'popularity.desc' 또는 'popularity.asc'
+    },
+  });
+};
 
-export const useSearchMovieQuery=({keyword,page,sortOption = "popularity.desc",genreFilter = "",})=>{
+export const useSearchMovieQuery=({
+  keyword='',
+  page=1,
+  genreFilter = '',
+  sortOption = "popularity.desc"
+})=>{
     return useQuery({
         queryKey:['movie-search',{keyword,page,sortOption,genreFilter }],
         queryFn:()=>fetchSearchMovie({keyword,page,sortOption,genreFilter }),

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Alert, Col, Container, Row, Spinner } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useSearchParams } from 'react-router-dom';
@@ -7,6 +7,8 @@ import { useSearchMovieQuery } from '../../hooks/useSearchMovie';
 import ReactPaginate from 'react-paginate';
 import './Moviepage.style.css';
 import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
+import { useState,useEffect  } from 'react';
+
 
 // 무비페이지 경로 2가지
 // 네브바 클릭 => 인기영화 보여줌
@@ -21,36 +23,20 @@ import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
 const MAX_PAGE = 500;
 
 export default function Moviepage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const keyword     = searchParams.get('q')     || '';
-  const page        = Number(searchParams.get('page')  || 1);
-  const sortOption  = searchParams.get('sort')  || 'popularity.desc';
-  const genreFilter = searchParams.get('genre') || '';
+  const [page, setPage]                 = useState(1);
+  const [sortOption, setSortOption]     = useState('popularity.desc'); // 'popularity.desc' or 'popularity.asc'
+  const [genreFilter, setGenreFilter]   = useState('');
+
+  useEffect(() => {
+    setPage(1);
+  }, [keyword, sortOption, genreFilter]);
 
   const { data, isLoading, isError, error } = useSearchMovieQuery({ keyword, page, sortOption, genreFilter });
   console.log("무비데이터", data);
   const { data: genres, isLoading: isGenreLoading } = useMovieGenreQuery();
-  console.log("장르데이터", genres);
-
-  const resultsArray = useMemo(
-    () => (Array.isArray(data?.results) ? data.results : []),
-    [data?.results]
-  );
-
-  const sortedResults = useMemo(() => {
-    return resultsArray.slice().sort((a, b) =>
-      sortOption === 'popularity.desc'
-        ? b.popularity - a.popularity
-        : a.popularity - b.popularity
-    );
-  }, [resultsArray, sortOption]);
-
-  const filteredResults = useMemo(() => {
-    if (!genreFilter) return sortedResults;
-    return sortedResults.filter(movie =>
-      Array.isArray(movie.genre_ids) && movie.genre_ids.includes(Number(genreFilter))
-    );
-  }, [sortedResults, genreFilter]);
+  //console.log("장르데이터", genres);
 
   if (isLoading || isGenreLoading) {
     return (
@@ -64,7 +50,13 @@ export default function Moviepage() {
     return <Alert variant="danger">{error.message}</Alert>;
   }
 
-  if (keyword && filteredResults.length === 0) {
+  const movies       = data?.results || [];
+  const rawTotal     = typeof data?.total_pages === 'number'
+                       ? data.total_pages
+                       : 0;
+  const pageCount    = Math.min(rawTotal, MAX_PAGE);
+
+  if (keyword && movies.length === 0) {
     return (
       <Container className="py-5 no-results-container d-flex justify-content-center">
         <Alert
@@ -78,21 +70,17 @@ export default function Moviepage() {
     );
   }
 
-  const rawTotalPages = typeof data?.total_pages === 'number' ? data.total_pages : 0;
-  const pageCount = Math.min(rawTotalPages, MAX_PAGE);
-
-  const updateParams = params => setSearchParams({ q: keyword, page, sort: sortOption, genre: genreFilter, ...params });
-
   const handlePageClick = ({ selected }) => {
-    updateParams({ page: selected + 1 });
+    setPage(selected + 1);
   };
 
   const handleSortChange = option => {
-    updateParams({ page: 1, sort: option });
+    setSortOption(option);
+    setGenreFilter('');   // 정렬 변경 시 장르 초기화
   };
 
   const handleGenreChange = genre => {
-    updateParams({ page: 1, genre });
+    setGenreFilter(genre);
   };
 
   return (
@@ -133,7 +121,7 @@ export default function Moviepage() {
 
           <Col lg={12} xs={12}>
             <Row className="g-4">
-              {filteredResults.map(movie => (
+              {movies.map(movie => (
                 <Col key={movie.id} lg={3} xs={12}>
                   <MovieCard movie={movie} />
                 </Col>
