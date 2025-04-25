@@ -76,7 +76,7 @@ export default function Moviepage() {
 
   const handleSortChange = option => {
     setSortOption(option);
-    setGenreFilter('');   // 정렬 변경 시 장르 초기화
+    setPage(1); 
   };
 
   const handleGenreChange = genre => {
