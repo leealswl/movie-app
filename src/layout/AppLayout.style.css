@@ -1,3 +1,4 @@
+/* 눈누폰트  */
 @font-face {
   font-family: 'LeferiPoint-SpecialItalicA';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialItalicA.woff') format('woff');
@@ -9,10 +10,10 @@
     background-color: black !important;
     font-weight : bold
 }
-
+/* 구글폰트 */
 .nav-home,
 .nav-movies {
-    font-family: 'LeferiPoint-SpecialItalicA';
+    font-family: 'Special Gothic Expanded One', sans-serif; 
     color:white !important;
 }
 .nav-home:hover,

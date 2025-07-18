@@ -12,7 +12,7 @@
     padding: 3rem 0 0rem 5rem;
 }
 .carousel-container {
-    overflow: hidden;
+    
     height: 440px;
     padding-left: 50px !important;
     margin-left: 0 !important;
@@ -23,6 +23,12 @@
     padding: 0 !important;
     margin-left:0 !important;
   }
+
+/* 도트와 푸터 사이 간격 */
+.react-multi-carousel-dot-list {
+  margin-bottom: 1rem;
+}
+
 .main-icon {
     font-size: 50px; 
 }

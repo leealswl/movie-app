@@ -18,10 +18,14 @@ const MovieSlider = ({title,movies,responsive,showTitle=true}) => {
           {title}
         </h3>
       )}
+
+{/*  <Carousel arrows={false} showDots={true} renderDotsOutside={renderButtonGroupOutside}> */}
          <Carousel
+            partialVisible={true}
             swipeable={true}              // 터치 스와이프 활성화
             draggable={true}
-            showDots={false}
+            showDots={true}
+            slidesToSlide={5}
             infinite={true} 
             centerMode={false}
             containerClass="carousel-container"
@@ -29,7 +33,7 @@ const MovieSlider = ({title,movies,responsive,showTitle=true}) => {
             responsive={responsive}
             arrows={true}
             autoPlay={true}
-            autoPlaySpeed={2000}
+            autoPlaySpeed={3000}
             removeArrowOnDeviceType={['mobile']}
             >
             {movies?.map((movie,index)=>
