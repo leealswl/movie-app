@@ -58,6 +58,7 @@ const Banner = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        height: "35vw", //배너 사이즈 늘림
     }}
     className="banner">
         <div className='text-white banner-text-area'>

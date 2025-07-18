@@ -10,8 +10,8 @@ html, body {
     padding: 0;
   }
 .movie-footer {
-    background-color: #111;       
-    color: #ddd;                  
+    background-color: #252525;       
+    color: #fff;                  
     padding:0 1rem;
     font-family: 'Arial', sans-serif;
     font-size: 0.9rem;
@@ -76,7 +76,7 @@ text-align: center;
 }
 
 .footer-bottom {
-    border-top: 1px solid #333;
+    border-top: 1px solid #555;
     padding-top: 1rem;
     font-size: 0.85rem;
     text-align: center;

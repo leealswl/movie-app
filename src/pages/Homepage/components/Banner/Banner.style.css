@@ -26,12 +26,14 @@
 .main-overview {
     font-size: 0.7em;
 }
+/*  배너 밑으로 갈수록 흐리게 인데 나중에 할거면?? 일단 수정 
+ */
 .banner:before {
     content:'';
     background: linear-gradient(to top, black, transparent);
     position: absolute;
     left: 0;
-    height: 60vh;
+    height: 80vh;
     width: 100%;
 }
 
