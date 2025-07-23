@@ -19,6 +19,20 @@
     
 }
 
+.carousel-container .react-multi-carousel-dot button {
+  border: none;
+  background: #ccc;   /* 기본 dot 색상 */
+  width: 10px;        /* dot 크기 */
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.carousel-container .react-multi-carousel-dot--active button {
+  background: #fc2e0a; /* 활성 dot 색상 (예: 토마토색) */
+}
+
 .movie-slider {
     padding: 0 !important;
     margin-left:0 !important;
