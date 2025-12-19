@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const TOKEN  =process.env.VITE_TMDB_TOKEN;
+const API_KEY =process.env.REACT_APP_API_KEY;
 // console.log('API_KEY:', process.env.REACT_APP_API_KEY);
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3', // 모든 요청의 기본 URL
     timeout: 1000, // 요청 타임아웃 설정 (밀리초 단위)
     headers: {
-        accept: 'application/json',
-        Authorization:`Bearer ${TOKEN}`,
+        Accept: 'application/json',
+        Authorization:`Bearer ${API_KEY}`,
     } 
   });
 
