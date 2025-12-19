@@ -10,6 +10,7 @@ const api = axios.create({
         Authorization:`Bearer ${API_KEY}`,
     } 
   });
+  // checking netlify
 
 
   // 요청 인터셉터: 요청을 보내기 전에 토큰을 추가하는 예
